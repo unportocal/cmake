@@ -4,6 +4,11 @@
 #define EPSILON 1e-10
 
 double mysqrt(double value){
+#if defined (HAVE_LOG) && defined (HAVE_EXP)
+	std::cout << "Platform has support for log and expo functions\n";
+#else
+	std::cout << "Platform does NOT have support for log and expo functions\n";
+#endif
 	if(value < 0)
 	{
 		std::cout << "Error in the input value. Negative input received." << std::endl;

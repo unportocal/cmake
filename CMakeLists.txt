@@ -12,6 +12,11 @@ set (Tutorial_VERSION_MINOR 001)
 option (USE_MYMATH 
         "Use tutorial provided math implementation" ON) 
 
+# does this system provide the log and exp functions?
+include (CheckFunctionExists)
+check_function_exists (log HAVE_LOG)
+check_function_exists (exp HAVE_EXP)
+		
 # configure a header file to pass some of the CMake settings
 # to the source code
 configure_file (
@@ -43,6 +48,12 @@ install (FILES "${PROJECT_BINARY_DIR}/inc/TutorialConfig.hpp"
 include (CTest)
 
 # does the app run ok?
+#define a macro to simplify adding tests, then use it
+macro (do_test arg result)
+  add_test (TutorialComp${arg} Tutorial ${arg})
+  set_tests_properties (TutorialComp${arg}
+    PROPERTIES PASS_REGULAR_EXPRESSION ${result})
+endmacro (do_test)
 add_test (TutorialRuns Tutorial 25)
 # does it sqrt?
 add_test (TutorialComp10 Tutorial 100)
@@ -56,4 +67,7 @@ set_tests_properties (TutorialSmall PROPERTIES PASS_REGULAR_EXPRESSION "0.0001 i
 # does the usage message work?
 add_test (TutorialUsage Tutorial)
 set_tests_properties (TutorialUsage PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*number")
-
+# do a bunch of result based tests
+do_test (25 "25 is 5")
+do_test (225 "225 is 15")
+do_test (111 "111 is 10.5357")
