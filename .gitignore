@@ -1,0 +1,6 @@
+/.metadata/
+/.git/
+/build/
+*.exe
+*.cmake
+*.o
