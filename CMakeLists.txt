@@ -34,5 +34,5 @@ endif(USE_MYMATH)
 add_executable(Tutorial src/tutor.cxx)
 
 #Link other libraries
-tarket_link_libraries (Tutorial ${EXTRA_LIBS})
+target_link_libraries (Tutorial ${EXTRA_LIBS})
 
