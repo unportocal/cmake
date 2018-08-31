@@ -1,20 +1,33 @@
 // mysqrt.hpp
-#include "../inc/mathFunctions.hpp"
- 
- double mysqrt(double number)
- {
-   long i;
-   double x2, y;
-   const double threehalfs = 1.5F;
+#include "mathFunctions.hpp"
 
-   x2 = number * 0.5F;
-   y  = number;
-   i  = * ( long * ) &y;                     // floating point bit level hacking [sic]
-   i  = 0x5f3759df - ( i >> 1 );             // Newton's approximation
-   y  = * ( double * ) &i;
-   y  = y * ( threehalfs - ( x2 * y * y ) ); // 1st iteration
-   y  = y * ( threehalfs - ( x2 * y * y ) ); // 2nd iteration
-   y  = y * ( threehalfs - ( x2 * y * y ) ); // 3rd iteration
+#define EPSILON 1e-3
 
-   return (1/y);
+double mysqrt(double value){
+	if(value < 0)
+	{
+		std::cout << "Error in the input value. Negative input received." << std::endl;
+		return -1;
+	}
+	double a = 1;
+	double b = value;
+	if(value < 1)
+	{
+		a = value;
+		b = 1;
+	}
+	double mid = (a + b) / 2;
+	double err = mid * mid - value;
+	while(fabs(err) > EPSILON)
+	{
+		if(err > 0)
+		{
+			b = mid;
+		}else{
+			a = mid;
+		}
+		mid = (a + b) / 2;
+		err = mid * mid - value;
+	}
+	return mid;
 }

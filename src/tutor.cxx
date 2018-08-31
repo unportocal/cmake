@@ -4,7 +4,7 @@
 #include <math.h>
 #include "inc/TutorialConfig.hpp"
 #ifdef USE_MYMATH
-#include "inc/mathFunctions.hpp"
+#include "../mathFunctions/mathFunctions.hpp"
 #endif
 
 int main (int argc, char *argv[])
@@ -21,10 +21,12 @@ int main (int argc, char *argv[])
   double inputValue = atof(argv[1]);
 #ifdef USE_MYMATH
   double outputValue = mysqrt(inputValue);
+  fprintf(stdout,"The Mymath square root of %g is %g\n",
+	  inputValue, outputValue);
 #else
   double outputValue = sqrt(inputValue);
-#endif
-  fprintf(stdout,"The square root of %g is %g\n",
+  fprintf(stdout,"The Std square root of %g is %g\n",
           inputValue, outputValue);
+#endif
   return 0;
 }
