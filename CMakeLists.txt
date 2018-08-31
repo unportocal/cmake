@@ -1,4 +1,5 @@
 # this tutorial is done from: https://cmake.org/cmake-tutorial/
+# run ctest cmd to run some tests after you built the target
 cmake_minimum_required (VERSION 2.6)
 project (Tutorial)
 #add_executable (Tutorial tutor.cxx)
@@ -27,12 +28,32 @@ if (USE_MYMATH)  # Should we add the MathFunctions library?
 	set (EXTRA_LIBS ${EXTRA_LIBS} mathFunctions)
 endif(USE_MYMATH)
 
-#add subdir_depends
-
-
 #Add executable
 add_executable(Tutorial src/tutor.cxx)
 
 #Link other libraries
 target_link_libraries (Tutorial ${EXTRA_LIBS})
+
+#add install targets
+install (TARGETS Tutorial DESTINATION bin)
+install (FILES "${PROJECT_BINARY_DIR}/inc/TutorialConfig.hpp"
+		DESTINATION include)
+		
+#Running some tests cmake
+include (CTest)
+
+# does the app run ok?
+add_test (TutorialRuns Tutorial 25)
+# does it sqrt?
+add_test (TutorialComp10 Tutorial 100)
+set_tests_properties (TutorialComp10 PROPERTIES PASS_REGULAR_EXPRESSION "100 is 10")
+# does it handle negative No's?
+add_test (TutorialNegative Tutorial -25)
+set_tests_properties (TutorialNegative PROPERTIES PASS_REGULAR_EXPRESSION "-25 is -1")
+# does it handle small numbers
+add_test (TutorialSmall Tutorial 0.0001)
+set_tests_properties (TutorialSmall PROPERTIES PASS_REGULAR_EXPRESSION "0.0001 is 0.01")
+# does the usage message work?
+add_test (TutorialUsage Tutorial)
+set_tests_properties (TutorialUsage PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*number")
 

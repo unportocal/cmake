@@ -1,7 +1,7 @@
 // mysqrt.hpp
 #include "mathFunctions.hpp"
 
-#define EPSILON 1e-3
+#define EPSILON 1e-10
 
 double mysqrt(double value){
 	if(value < 0)
