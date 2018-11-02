@@ -74,4 +74,6 @@ set_tests_properties (TutorialUsage PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*
 # do a bunch of result based tests
 do_test (25 "25 is 5")
 do_test (225 "225 is 15")
-do_test (111 "111 is 10.5357")
+do_test (111 "111 is 10.5333")
+
+

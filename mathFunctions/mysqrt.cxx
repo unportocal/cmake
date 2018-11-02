@@ -1,4 +1,4 @@
-// mysqrt.hpp
+// mysqrt.cxx
 // Just a small change 
 /*
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
@@ -30,9 +30,13 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 #include "mathFunctions.hpp"
 
+//Include the generated file
+#include <Table.h>
+
 #define EPSILON 1e-10
 
-double mysqrt(double value){
+double mysqrt(double value)
+    {
 #if defined (HAVE_LOG) && defined (HAVE_EXP)
 	std::cout << "Platform has support for log and expo functions\n";
 #else
@@ -43,25 +47,34 @@ double mysqrt(double value){
 		std::cout << "Error in the input value. Negative input received." << std::endl;
 		return -1;
 	}
-	double a = 1;
-	double b = value;
-	if(value < 1)
-	{
-		a = value;
-		b = 1;
-	}
-	double mid = (a + b) / 2;
-	double err = mid * mid - value;
-	while(fabs(err) > EPSILON)
-	{
-		if(err > 0)
-		{
-			b = mid;
-		}else{
-			a = mid;
-		}
-		mid = (a + b) / 2;
-		err = mid * mid - value;
-	}
-	return mid;
+// If value is included in the pre-calculated table:
+// TODO: @Victor: make the number general
+	if (value > 1000)
+	    {
+	    double a = 1;
+	    double b = value;
+	    if(value < 1)
+	    {
+		    a = value;
+		    b = 1;
+	    }
+	    double mid = (a + b) / 2;
+	    double err = mid * mid - value;
+	    while(fabs(err) > EPSILON)
+	    {
+		    if(err > 0)
+		    {
+			    b = mid;
+		    }else{
+			    a = mid;
+		    }
+		    mid = (a + b) / 2;
+		    err = mid * mid - value;
+	    }
+	    return mid;
+	    }
+	else
+	    {
+	    return sqrtTable[static_cast<int>(value)];
+	    }
 }
