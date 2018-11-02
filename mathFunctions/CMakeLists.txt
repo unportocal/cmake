@@ -15,5 +15,5 @@ include_directories( ${CMAKE_CURRENT_BINARY_DIR} )
 # add the main library 
 add_library (mathFunctions mysqrt.cxx ${CMAKE_CURRENT_BINARY_DIR}/Table.h)
 
-install (TARGETS mathFunctions/mathFunctions.hpp DESTINATION bin)
+install (TARGETS mathFunctions DESTINATION bin)
 install (FILES mathFunctions.hpp DESTINATION include)
