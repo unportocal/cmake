@@ -1,6 +1,9 @@
 /.metadata/
 /.git/
+/.settings/
 /build/
+*.cproject
+*.project
 *.exe
 *.cmake
 *.o

@@ -1,19 +1,22 @@
 # this tutorial is done from: https://cmake.org/cmake-tutorial/
 # run ctest cmd to run some tests after you built the target
-cmake_minimum_required (VERSION 2.6)
+
+cmake_minimum_required (VERSION 2.8.4)
 project (Tutorial)
 #add_executable (Tutorial tutor.cxx)
-#The version number.
+#The version number:
 
 set (Tutorial_VERSION_MAJOR 1)
-set (Tutorial_VERSION_MINOR 001)
+set (Tutorial_VERSION_MINOR 002)
 
 # should we use our own math functions?
 option (USE_MYMATH 
         "Use tutorial provided math implementation" ON) 
 
 # does this system provide the log and exp functions?
-include (CheckFunctionExists)
+#include (CheckFunctionExists)
+include (${CMAKE_ROOT}/Modules/CheckFunctionExists.cmake)
+
 check_function_exists (log HAVE_LOG)
 check_function_exists (exp HAVE_EXP)
 		
@@ -47,13 +50,14 @@ install (FILES "${PROJECT_BINARY_DIR}/inc/TutorialConfig.hpp"
 #Running some tests cmake
 include (CTest)
 
-# does the app run ok?
 #define a macro to simplify adding tests, then use it
 macro (do_test arg result)
   add_test (TutorialComp${arg} Tutorial ${arg})
   set_tests_properties (TutorialComp${arg}
     PROPERTIES PASS_REGULAR_EXPRESSION ${result})
 endmacro (do_test)
+
+#does the app run ok?
 add_test (TutorialRuns Tutorial 25)
 # does it sqrt?
 add_test (TutorialComp10 Tutorial 100)
