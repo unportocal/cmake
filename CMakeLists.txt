@@ -6,7 +6,7 @@ set(CMAKE_BUILD_TYPE RELEASE)
 include_directories(inc)
 
 #Manually add the sources using set command. Main file should not be included in library...
-#set(SOURCES src/student.cpp)
+set(SOURCES src/student.cpp)
 
 #However the file (GLOB...) Allows wildcard additions:
 #file(GLOB SOURCES src/*.cpp) 
