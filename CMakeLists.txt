@@ -5,11 +5,11 @@ set(CMAKE_BUILD_TYPE RELEASE)
 #Bring the headers into the project
 include_directories(inc)
 
-#Manually add the sources using set command
-#set(SOURCES src/mainapp.cpp src/student.cpp)
+#Manually add the sources using set command. Main file should not be included in library...
+#set(SOURCES src/student.cpp)
 
 #However the file (GLOB...) Allows wildcard additions:
-file(GLOB SOURCES src/*.cpp) 
+#file(GLOB SOURCES src/*.cpp) 
 
 #Generate shared LIB from sources
 add_library(testStudSharedLib SHARED ${SOURCES})
