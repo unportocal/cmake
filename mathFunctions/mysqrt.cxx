@@ -37,7 +37,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 double mysqrt(double value)
     {
-#if defined (HAVE_LOG) && defined (HAVE_EXP)
+#if defined(HAVE_LOG) && defined(HAVE_EXP)
 	std::cout << "Platform has support for log and expo functions\n";
 #else
 	std::cout << "Platform does NOT have support for log and expo functions\n";
