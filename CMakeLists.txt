@@ -1,19 +1,15 @@
 cmake_minimum_required(VERSION 3.6.2)
-project(directoryTest)
-set(CMAKE_BUILD_TYPE RELEASE)
+project(TestSharedLib)
+#set(CMAKE_BUILD_TYPE RELEASE)
 
-#Bring the headers into the project
-include_directories(inc)
+#for the shared lib:
+set (PROJECT_LINK_LIBS libTestStudent.dll )	# or so?
+link_directories(/build)
 
-#Manually add the sources using set command. Main file should not be included in library...
-set(SOURCES src/student.cpp)
+#for the static library:
+#set (PROJECT_LINK_LIBS libTestStudent.so )	# or dll?
 
-#However the file (GLOB...) Allows wildcard additions:
-#file(GLOB SOURCES src/*.cpp) 
+include_directories(/inc)
 
-#Generate shared LIB from sources
-add_library(testStudSharedLib SHARED ${SOURCES})
-
-#Set location for lib installation - i.e. usr/lib for our example
-#Use sudo make install to apply
-install (TARGETS testStudSharedLib DESTINATION /usr/lib)
+add_executable(libtest src/mainapp.cpp)
+target_link_libraries(libtest ${PROJECT_LINK_LIBS})

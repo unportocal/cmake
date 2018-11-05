@@ -9,8 +9,10 @@
 
 int main (int argc, char *argv[])
     {
-    Student stud("Joe");
-    stud.display();
+    Student stud2("Where you going with?");
+    Student stud1("Hey Joe");
+    stud1.display();
+    stud2.display();
 
     return EXIT_SUCCESS;
     }
