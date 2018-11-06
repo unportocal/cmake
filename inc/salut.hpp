@@ -4,9 +4,8 @@
 class HelloClass {
 private:
   /* data */
-
 public:
-  HelloClass (arguments);
   void HelloPrint(/* void */);
-  virtual ~HelloClass ();
 };
+
+#endif

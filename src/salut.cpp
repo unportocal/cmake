@@ -3,5 +3,5 @@
 
 void HelloClass::HelloPrint()
 {
-  std::std::cout << "HelloClass says me. With headers and includes & sht" << '\n';
+  std::cout << "HelloClass says me. With headers and includes & sht" << '\n';
 }

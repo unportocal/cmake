@@ -1,8 +1,12 @@
+#include "salut.hpp"
 #include <iostream>
 
 int main(int argc, char *argv[])
 {
-   std::cout << "Hello CMake!" << std::endl;
+   std::cout << "Hello CMake from main!" << std::endl;
+   HelloClass classInstace;
+   classInstace.HelloPrint();
+
    return 0;
 }
 
