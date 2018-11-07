@@ -1,22 +1,19 @@
 
-# https://github.com/ttroy50/cmake-examples/tree/master/01-basic/E-installing#introduction
-#	Release - Adds the -O3 -DNDEBUG flags to the compiler
-#	Debug - Adds the -g flag
-#	MinSizeRel - Adds -Os -DNDEBUG
-#	RelWithDebInfo - Adds -O2 -g -DNDEBUG flags
+# https://github.com/ttroy50/cmake-examples/tree/master/01-basic/G-compile-flags
+#	CMake supports setting compile flags in a number of different ways:
+#	using target_compile_definitions() function using the CMAKE_C_FLAGS and CMAKE_CXX_FLAGS variables.
 
 cmake_minimum_required(VERSION 3.5)
-# Set a default build type if none was specified
-if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
-  message("Setting build type to 'RelWithDebInfo' as none was specified.")
-  set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build." FORCE)
-  # Set the possible values of build type for cmake-gui
-  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
-    "MinSizeRel" "RelWithDebInfo")
-endif()
+
+# Set a default C++ compile flag
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DEX2" CACHE STRING "Set C++ Compiler Flags" FORCE)
 
 # Set the project name
-project (build_type)
+project (compile_flags)
 
 # Add an executable
-add_executable(cmake_build_type src/noDepend.cpp)
+add_executable(cmake_examples_compile_flags src/noDepend.cpp)
+
+target_compile_definitions(cmake_examples_compile_flags
+    PRIVATE EX3
+	)
