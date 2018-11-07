@@ -1,7 +1,7 @@
 #include <iostream>
-#include "salut.hpp"
+#include "static/salut.hpp"
 
 void HelloClass::HelloPrint()
 {
-  std::cout << "HelloClass says me. With headers and includes & sht" << '\n';
+  std::cout << "HelloClass says me. \nFrom static library" << '\n';
 }

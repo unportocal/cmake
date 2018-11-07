@@ -1,5 +1,5 @@
-#include "salut.hpp"
 #include <iostream>
+#include "static/salut.hpp"
 
 int main(int argc, char *argv[])
 {
