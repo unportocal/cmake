@@ -1,11 +1,11 @@
 #include <iostream>
-#include "static/salut.hpp"
+#include "shared/salut.hpp"
 
 int main(int argc, char *argv[])
 {
    std::cout << "Hello CMake from main!" << std::endl;
    HelloClass classInstace;
-   classInstace.HelloPrint();
+   classInstace.HelloPrintShared();
 
    return 0;
 }

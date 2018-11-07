@@ -1,24 +1,23 @@
 
-#https://github.com/ttroy50/cmake-examples/tree/master/01-basic/C-static-library#introduction
+#https://github.com/ttroy50/cmake-examples/tree/master/01-basic/D-shared-library#introduction
 cmake_minimum_required(VERSION 3.5)
 project (hello_cmakeHeaders)
 
-#Add static library:
-add_library(helloStaticLib STATIC src/salut.cpp)
-#This will be used to create a static library with the name libhello_library.a? with the sources in the add_library call.
+add_library (sharedLib
+    SHARED
+    src/salut.cpp)
+#this will create a shared lib with libLibName.so
 
-#Will include directories with the scope set to public
-target_include_directories(helloStaticLib
-    PUBLIC
-    ${PROJECT_SOURCE_DIR}/inc
-    )
-#For public headers it is often a good idea to have your include folder be "namespaced" with sub-directories
+add_library(hello::sharedLibAlias ALIAS sharedLib)
+# this will create an alias that can be used in read-only context
 
-#Wn creating an exec that will use your library you must tell the compiler about the library. done using target_link_library()
+target_include_directories (sharedLib
+	PUBLIC
+	${PROJECT_SOURCE_DIR}/inc)
 
-add_executable(binaryStatLibDependent src/main.cpp)
+add_executable (helloExec
+	src/main.cpp)
 
-target_link_libraries( binaryStatLibDependent
-    PRIVATE
-    helloStaticLib
-    )
+target_link_libraries (helloExec
+	PRIVATE
+	hello::sharedLibAlias)

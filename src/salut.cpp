@@ -1,7 +1,7 @@
 #include <iostream>
-#include "static/salut.hpp"
+#include "shared/salut.hpp"
 
-void HelloClass::HelloPrint()
+void HelloClass::HelloPrintShared()
 {
-  std::cout << "HelloClass says me. \nFrom static library" << '\n';
+  std::cout << "HelloClass says me. \nSharing is caring. salut.cpp" << '\n';
 }
