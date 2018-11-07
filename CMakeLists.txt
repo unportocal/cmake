@@ -1,61 +1,22 @@
 
 # https://github.com/ttroy50/cmake-examples/tree/master/01-basic/E-installing#introduction
-# This example shows how to generate a make install target to install files and binaries on your system.
-# he base install location is controlled by the variable CMAKE_INSTALL_PREFIX which can be set using ccmake
-# or by calling cmake with cmake .. -DCMAKE_INSTALL_PREFIX=/install/location
+#	Release - Adds the -O3 -DNDEBUG flags to the compiler
+#	Debug - Adds the -g flag
+#	MinSizeRel - Adds -Os -DNDEBUG
+#	RelWithDebInfo - Adds -O2 -g -DNDEBUG flags
 
 cmake_minimum_required(VERSION 3.5)
-project (helloCmakeInstall)
-
-if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-	message (STATUS "Setting default CMAKE_INSTALL_PREFIX path to ${CMAKE_BINARY_DIR}/makeInstall")
-	set (CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/makeInstall" CACHE STRING "The path to use for make install" FORCE)
+# Set a default build type if none was specified
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  message("Setting build type to 'RelWithDebInfo' as none was specified.")
+  set(CMAKE_BUILD_TYPE RelWithDebInfo CACHE STRING "Choose the type of build." FORCE)
+  # Set the possible values of build type for cmake-gui
+  set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
+    "MinSizeRel" "RelWithDebInfo")
 endif()
 
-############################################################
-# Create a library
-############################################################
+# Set the project name
+project (build_type)
 
-add_library (sharedLibInstall
-    SHARED
-    src/salut.cpp)
-# this will create a shared lib with libLibName.so
-
-add_library(hello::sharedLibInstAlias ALIAS sharedLibInstall)
-# this will create an alias that can be used in read-only context
-
-target_include_directories (sharedLibInstall
-	PUBLIC
-	${PROJECT_SOURCE_DIR}/inc)
-
-############################################################
-# Create an executable
-############################################################
-
-add_executable (execInstallBin
-	src/main.cpp)
-
-target_link_libraries (execInstallBin
-	PRIVATE
-	hello::sharedLibInstAlias)
-
-############################################################
-# Create an installation
-############################################################
-
-# Binaries
-install (TARGETS execInstallBin
-	DESTINATION bin)
-
-# Library. Doesn't work on windows
-install (TARGETS sharedLibInstall
-    LIBRARY DESTINATION lib)
-
-# Header files
-install (DIRECTORY ${PROJECT_SOURCE_DIR/inc/}
-	DESTINATION inc)
-
-# Install the header files for developing against the cmake_examples_inst library into the ${CMAKE_INSTALL_PREFIX}/include directory.
-# Config
-install (FILES cmake-example.conf
-	DESTINATION etc)
+# Add an executable
+add_executable(cmake_build_type src/noDepend.cpp)
