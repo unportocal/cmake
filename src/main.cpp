@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[])
 {
-   std::cout << "Hello CMake from main!" << std::endl;
+   std::cout << "Hello Install from main!" << std::endl;
    HelloClass classInstace;
    classInstace.HelloPrintShared();
 
