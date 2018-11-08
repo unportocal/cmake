@@ -2,7 +2,8 @@
 
 int main(int argc, char *argv[])
 {
-   std::cout << "Hello Japan Assasin" << std::endl;
+    auto message = "hello c++11";
+    std::cout << message << std::endl;
 
    return 0;
 }
