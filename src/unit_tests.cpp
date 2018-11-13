@@ -19,6 +19,17 @@ TEST_F(ReverseTests, simple )
 
 }
 
+TEST_F(ReverseTests, simple1 )
+{
+    std::string toRev = "Alergare";
+
+    Reverse rev;
+    std::string res = rev.reverse(toRev);
+
+    EXPECT_EQ(res, "eragrelA" );
+
+}
+
 TEST_F(ReverseTests, empty )
 {
     std::string toRev;
